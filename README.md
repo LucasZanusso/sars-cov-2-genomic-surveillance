@@ -148,9 +148,9 @@ This comprehensive R script acts as the analytical engine of the project. It int
 **Genomic Divergence**
 
 
-The analysis receals a significant increase in mutational load in 2026 samples compared to 2023 samples.
+The analysis reveals a significant increase in mutational load in 2026 samples compared to 2023 samples.
 
-Hotspots are predominantly located in the Spike (S) Protein region, consistent with positive selection for immune scape
+Hotspots are predominantly located in the Spike (S) Protein region, consistent with positive selection for immune escape
 
 
 **Genomic Tracks(Gviz)**
