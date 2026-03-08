@@ -116,6 +116,32 @@ This script performs the biological interpretation of the identified variants. B
 
 **Tools used:** `snpEff` (Java-based).
 
+---
+
+---
+
+### `05_genomic_data_analysis.R` (R Data Science & Statistical Assessment)
+This comprehensive R script acts as the analytical engine of the project. It integrates genomic variants with biological annotations to perform longitudinal statistical comparisons between 2023 and 2026 SARS-CoV-2 lineages.
+
+**Key Features:**
+
+* **Genomic Track Visualization (`Gviz`):**
+    * Constructs high-resolution genomic maps by integrating **TxDb** objects from GFF3 annotations.
+    * Generates comparative tracks (2023 vs. 2026) that align mutation hotspots with the viral gene structure (e.g., Spike and ORF1ab proteins).
+* **Data Wrangling & Integration (`tidyverse`):**
+    * Uses a custom-built function to extract and label variants from multiple VCF files simultaneously.
+    * Classifies variants by type (SNP, Insertion, or Deletion) for structural analysis.
+* **Statistical Validation:**
+    * **Non-Parametric Testing:** Implements the **Wilcoxon Rank Sum Test** to compare mutation counts between periods, accounting for the small sample size ($n=10$).
+    * **Categorical Analysis:** Performs **Chi-squared ($\chi^2$) tests** to evaluate if the proportion of mutation types or their location (e.g., inside vs. outside the Spike protein) significantly changed over time.
+* **Advanced Data Visualization (`ggplot2`):**
+    * **Quality Profiling:** Produces faceted Manhattan-style plots to validate the `QUAL` distribution across all samples.
+    * **Evolutionary Divergence:** Generates boxplots and jitter plots illustrating the "Genetic Distance" from the Wuhan reference strain.
+    * **Proportional Analysis:** Visualizes the shift in variant types using stacked percentage bar charts, integrated with p-values from statistical tests.
+
+**Libraries used:** `Gviz`, `VariantAnnotation`, `GenomicFeatures`, `tidyverse`, `ggplot2`, `Biostrings`.
+
+---
 # Key Results
 
 
