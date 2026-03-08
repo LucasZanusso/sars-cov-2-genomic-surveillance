@@ -52,45 +52,46 @@ CoV-2, focusing on mutational evolution between 2023 strains and recent 2026 lin
 # Project Structure & Scripts
 Each script in this project has been programmed to be used in sequence, so the output of `00_download_data.sh` will be used as input for `01_qc_batch.sh`, and so on. Therefore, it is necessary to pay attention to the directories created in each step to avoid errors.
 
-**`00_download_data.sh`**(Bash):
-This script handles the automated retrieval and organization of raw sequencing data from the NCBI Sequence Read Archive (SRA). It establishes the directory architecture required for the longitudinal comparison.
+### `00_download_data.sh` (SRA Data Retrieval)
+This script handles the automated retrieval and organization of raw sequencing data from the **NCBI Sequence Read Archive (SRA)**. It establishes the directory architecture required for the longitudinal comparison.
 
-   **Automated Workspace Setup**: Initializes the data/antigo, data/recente, and logs directories to maintain a clean environment.
+**Key features:**
+* **Automated Workspace Setup:** Initializes the `data/antigo`, `data/recente`, and `logs` directories.
+* **Batch Retrieval (`fasterq-dump`):** Efficiently downloads high-throughput sequencing data for 20 accessions.
+* **Organized Storage:** Creates individual subdirectories for each `SRR ID`, preventing file collisions.
+* **Logging:** Captures output and errors into `logs/download.log`.
 
-   **Batch Retrieval (`fasterq-dump`):** Efficiently downloads high-throughput sequencing data for 20 specified accessions (10 from the 2023 outbreak and 10 from the 2026 lineage).
+**Tools used:** `sra-tools` (`fasterq-dump`).
 
-   **Organized Storage:** Creates individual subdirectories for each **SRR ID**, preventing file collisions and simplifying downstream loop processing.
+---
 
-   **Logging:** Captures all standard output and errors into logs/download.log for troubleshooting and audit trailing.
+### `01_qc_batch.sh` (Batch QC Pipeline)
+This script automates the **Quality Control (QC)** and **Preprocessing** for all sequencing libraries. It ensures that only high-quality reads are used for downstream variant calling.
 
-Tools used: `sra-tools` (`fasterq-dump`).
+**Key features:**
+* **Directory Management:** Categorizes output in `results/qc/antigo` and `results/qc/recente`.
+* **Automated Trimming (`fastp`):** Performs adapter trimming and quality filtering for paired-end reads.
+* **Secondary Validation (`FastQC`):** Runs a second round of quality checks on the "cleaned" files.
+* **Metadata Aggregation (`MultiQC`):** Summarizes all reports into a single dashboard in `results/qc/multiqc_final`.
 
-**`01_qc_batch.sh`**(Bash):
-This script automates the **Quality Control (QC)** and **Preprocessing** for all sequencing libraries in the dataset. It ensures that only high-quality reads are used for downstream variant calling.
+**Tools used:** `fastp`, `fastqc`, `multiqc`.
 
-   **Directory Management:** Automatically creates categorized output structures in `results/qc/antigo` and `results/qc/recente`.
-    
-   **Automated Trimming (`fastp`):** Performs adapter trimming, quality filtering, and length filtering for paired-end reads. It generates detailed `.html` and `.json` reports for each sample.
+---
 
-   **Secondary Validation (`FastQC`):** Runs a second round of quality checks on the "cleaned" (trimmed) files to verify successful filtering.
+### `02_alignment.sh` (Read Mapping & BAM Processing)
+This script performs the core task of aligning reads to the **Wuhan-Hu-1 (NC_045512.2)** reference genome using the BWA algorithm.
 
-   **Metadata Aggregation (`MultiQC`):** Summarizes all individual QC reports into a single, interactive MultiQC dashboard located in `results/qc/multiqc_final`.
-
-**`02_alignment.sh`**(Bash):
-
-This script performs the core bioinformatic task of aligning high-quality sequencing reads to the **Wuhan-Hu-1 (NC_045512.2)** reference genome. It transforms raw sequence data into spatially organized genomic information.
-
-**Reference-Based Alignment** (`BWA MEM`): Executes the Burrows-Wheeler Alignment algorithm with multi-threading support (`-t 4`) for high-speed mapping.
-
-**Read Group Header Addition** (`-R`): Incorporates essential metadata (`ID`, `SM`, `PL:ILLUMINA`) into the alignment files, ensuring compatibility with downstream variant callers and quality assessment tools.
-
- **BAM Lifecycle Management** (`Samtools`):
+**Key features:**
+* **Reference-Based Alignment (`BWA MEM`):** Executes mapping with multi-threading support (`-t 4`).
+* **Read Group Header Addition (`-R`):** Incorporates essential metadata (`ID`, `SM`, `PL:ILLUMINA`) for best practices.
 * **BAM Lifecycle Management (`Samtools`):** Handles conversion (SAM to BAM), coordinate sorting, and indexing (`.bai`).
 * **Storage Optimization:** Automatically removes intermediate `.sam` and un-sorted `.bam` files to save disk space.
 
 **Tools used:** `bwa`, `samtools`.
 
-### `03_variant_calling_and_filtering.sh` (Genomic Variant Discovery)
+---
+
+### `03_variant_calling_.sh` (Genomic Variant Discovery)
 This script identifies genetic divergences (SNPs and Indels) between the aligned samples and the reference genome. It implements a robust filtering strategy to ensure the reliability of the identified mutations.
 
 **Key features:**
@@ -102,7 +103,9 @@ This script identifies genetic divergences (SNPs and Indels) between the aligned
 
 **Tools used:** `bcftools`, `htslib` (`bgzip`, `tabix`).
 
-### `04_functional_annotation.sh` (Variant Annotation & Impact Assessment)
+---
+
+### `04_annotation.sh` (Variant Annotation & Impact Assessment)
 This script performs the biological interpretation of the identified variants. By integrating the genomic coordinates with the **SARS-CoV-2 (NC_045512.2)** database, it predicts the functional impact of each mutation on the viral proteins.
 
 **Key features:**
