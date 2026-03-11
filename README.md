@@ -155,28 +155,21 @@ Hotspots are predominantly located in the Spike (S) Protein region, consistent w
 
 **Genomic Tracks(Gviz)**
 
+<img width="1200" height="1600" alt="comparativo_2026" src="https://github.com/user-attachments/assets/9b80e562-893c-45eb-8945-1a6d4b779d47" />
 
-<img width="1200" height="1600" alt="comparativo_evolutivo_20231" src="https://github.com/user-attachments/assets/8362688b-a0e6-460b-92d0-b07951e3d1c4" />
-
-
-
-<img width="1200" height="1600" alt="comparativo_evolutivo_20261" src="https://github.com/user-attachments/assets/7c2f6f17-9a3f-4045-9ec9-ab76f08c10ba" />
+<img width="1200" height="1600" alt="comparativo_2023" src="https://github.com/user-attachments/assets/89dc947e-fe16-42ed-9628-80d35c44efcb" />
 
 
 **Variant Quality (Manhattan Plot)**
+<img width="1200" height="1600" alt="comparativo_2026" src="https://github.com/user-attachments/assets/61020ce7-b6a2-4253-8f87-77fbbdf262a3" />
 
-
-<img width="3000" height="2400" alt="qualidade_antigas_2023" src="https://github.com/user-attachments/assets/d1132a21-5d36-45bc-bd8b-0117d4e2b47f" />
-
-
-
-<img width="3000" height="2400" alt="qualidade_recentes_2026" src="https://github.com/user-attachments/assets/dc4d6587-5639-4a3d-aa9d-536d1bf86708" />
+<img width="1200" height="1600" alt="comparativo_2023" src="https://github.com/user-attachments/assets/c10acbed-c536-4f6e-a750-42b701d17fde" />
 
 
 **Total Genomic Divergence**
 
 
-<img width="3000" height="3000" alt="numero_de_mutações" src="https://github.com/user-attachments/assets/138faa5c-da8b-4b35-9a94-3654e0961449" />
+<img width="2400" height="1800" alt="divergencia_final" src="https://github.com/user-attachments/assets/c26d32fc-7934-460a-bc5c-719bc7155207" />
 
 
 **Evolutionary Insights**
@@ -186,7 +179,10 @@ While limited by sample size (n=10), the clear trend in mutation density per kil
 Receptor Binding Domain (RBD).
 
 # How to reproduce:
-1. Download the scripts.sh\
-2. Install dependencies (Conda environment recommended)\
-3. Enter the desired SRR identifiers in the download_data.sh script\
-4. Run the scripts in sequence
+1.Clone this repository: git clone https://github.com/LucasZanusso/sars-cov-2-genomic-surveillance
+
+2.Create and activate the Conda environment: conda env create -f environment.yml && conda activate sars-cov2-surveillance
+
+3.Edit `samples.txt with your desired SRR accessions or use the provided ones
+
+4.Run the scripts in sequence: bash 00_download_data.sh, and so on
