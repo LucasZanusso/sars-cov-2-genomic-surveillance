@@ -207,11 +207,11 @@ types differed significantly between periods (χ² = 6.04, df = 1, p = 0.014), i
 the mutational landscape is not only larger but qualitatively distinct in 2026 — consistent 
 with directional selection rather than neutral drift.
 
-**Positive selection concentrated in the Spike protein.** The proportion of variants mapping 
-to the Spike (S) gene was significantly higher in 2026 samples (χ² = 6.32, df = 1, p = 0.012). 
-Notably, 2026 lineages carry ~67 moderate-impact variants per sample in the Spike alone, 
-compared to ~2 in 2023 samples — a ~33-fold increase concentrated at the primary antigenic 
-target of the virus.
+**Positive selection concentrated in the Spike protein.** 
+2026 lineages carry a mean of ~67 moderate-impact variants per sample in the Spike, 
+compared to a mean of ~22 in 2023 samples (range: 1–33), reflecting both the 
+directional increase in mutational load and the heterogeneity within the 2023 cohort — 
+consistent with the co-circulation of multiple Omicron sublineages during that period.
 
 **Fixed immune escape mutations in the RBD.** All 10 (10/10) 2026 samples share a conserved 
 set of non-synonymous substitutions in the Receptor Binding Domain, including positions 
