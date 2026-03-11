@@ -1,0 +1,33 @@
+name: sars-cov2-surveillance
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  # Data retrieval
+  - sra-tools=3.0.10
+
+  # Quality Control
+  - fastp=0.23.4
+  - fastqc=0.12.1
+  - multiqc=1.21
+
+  # Alignment
+  - bwa=0.7.18
+  - samtools=1.20
+
+  # Variant Calling
+  - bcftools=1.20
+  - htslib=1.20
+
+  # Annotation
+  - snpeff=5.2
+
+  # R and packages
+  - r-base=4.4.1
+  - bioconductor-gviz
+  - bioconductor-variantannotation
+  - bioconductor-genomicfeatures
+  - bioconductor-biostrings
+  - r-tidyverse
+  - r-ggplot2
