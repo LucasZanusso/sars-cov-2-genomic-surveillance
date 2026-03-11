@@ -46,6 +46,7 @@ CoV-2, focusing on mutational evolution between 2023 strains and recent 2026 lin
 | 4. Variant Calling | `03_variant_calling.sh` | BCFtools | `.vcf.gz` |
 | 5. Annotation | `04_annotation.sh` | SnpEff | annotated `.vcf`, HTML report |
 | 6. Analysis | `05_genomic_data_analysis.R` | R/Bioconductor | figures, statistics |
+| 7. Spike Analysis | `06_spike_mutation_analysis.R` | R/tidyverse | figures, tables |
 
 
 # Project Structure & Scripts
@@ -53,6 +54,7 @@ Each script in this project has been programmed to be used in sequence, so the o
 
 ### Prerequisites
 `environment.yml` — Conda environment with all dependencies and versions
+
 `samples.txt` — SRR accessions used in this analysis
 
 ### `00_download_data.sh` (SRA Data Retrieval)
@@ -144,6 +146,21 @@ This comprehensive R script acts as the analytical engine of the project. It int
 **Libraries used:** `Gviz`, `VariantAnnotation`, `GenomicFeatures`, `tidyverse`, `ggplot2`, `Biostrings`.
 
 ---
+
+### `06_spike_mutation_analysis.R` (Spike Mutation Profiling)
+This script performs a focused analysis of Spike protein variants, comparing mutational profiles between 2023 and 2026 cohorts.
+
+**Key Features:**
+* **Variant Composition:** Quantifies and compares missense vs. synonymous mutations in the Spike gene across both periods.
+* **Fixed Mutation Identification:** Identifies amino acid substitutions present in 10/10 samples of the 2026 cohort, representing lineage-defining mutations.
+* **Immune Escape Annotation:** Flags mutations at positions previously associated with immune escape and ACE2 binding affinity (e.g., S477N, T478K, F486L/S, K417N).
+
+**Outputs:** `results/figures/spike_variant_composition.png`, `results/tables/spike_comparative_table.tsv`, `results/tables/fixed_mutations_2026.tsv`.
+
+**Libraries used:** `tidyverse`.
+
+---
+
 # Key Results
 
 
